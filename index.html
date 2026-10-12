@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff5ed">
+<meta name="description" content="A little birthday scrapbook made especially for Nandini, with love from Mehul.">
+<title>For Nandini — a little birthday scrapbook 💌</title>
+<style>
+:root{--paper:#fffaf2;--paper2:#fff2e6;--ink:#4b3737;--rose:#bc6577;--rose2:#f4c6cb;--red:#a64e61;--gold:#d8ad65;--sage:#a7b9a1;--lav:#d8c8df;--shadow:0 18px 45px #65433b18}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background-color:#f9e9e0;background-image:radial-gradient(#d8b8aa55 .8px,transparent .8px);background-size:13px 13px}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+button:focus-visible,input:focus-visible{outline:3px solid #b85c79;outline-offset:3px}
+.cover{min-height:100svh;display:grid;place-items:center;padding:22px;position:relative;overflow:hidden}
+.paper{background:var(--paper);border:1px solid #fff;box-shadow:var(--shadow);position:relative}
+.paper:before{content:"";position:absolute;inset:9px;border:1px dashed #d9b8a7;pointer-events:none}
+.cover-card{width:min(650px,100%);padding:clamp(32px,7vw,70px) 25px;text-align:center;transform:rotate(-1deg)}
+.tape{position:absolute;top:-13px;left:calc(50% - 48px);width:96px;height:28px;background:#d8c8dfb8;transform:rotate(-4deg);z-index:2}
+.eyebrow{font:700 .72rem/1.5 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+h1,h2,h3{font-weight:500}
+h1{font-size:clamp(3rem,10vw,6.5rem);line-height:.92;margin:20px 0;color:var(--red)}
+h2{font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.05;color:var(--red);margin:10px 0 15px}
+.subtitle{font:1rem/1.8 system-ui,sans-serif;max-width:460px;margin:0 auto 24px;color:#775d59}
+.stamp{font-size:4.4rem;display:block;animation:sway 3s ease-in-out infinite}
+.btn{border:0;border-radius:999px;padding:13px 22px;background:var(--red);color:#fffaf2;box-shadow:0 7px 0 #773344;transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(2px);box-shadow:0 5px 0 #773344}
+.btn.secondary{background:#f4dce0;color:#713c49;box-shadow:0 6px 0 #d8a8b1}
+.btn.light{background:#fff;color:var(--red);box-shadow:0 6px 0 #e7c8c2}
+.small-note{font: .8rem/1.6 system-ui,sans-serif;color:#997b75;margin-top:18px}
+.lock-card{width:min(430px,100%);padding:36px 24px;text-align:center}
+.lock-card input{display:block;width:100%;padding:13px 15px;border:1px solid #dfc0b4;background:#fffdf9;border-radius:12px;margin:15px 0;color:var(--ink)}
+.error{color:#a8324e;font: .9rem system-ui,sans-serif;min-height:1.4em}
+#site{display:none}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:1000px;margin:auto;padding:18px 20px;font: .82rem system-ui,sans-serif;color:#8e5a62}
+.music{border:1px solid #e2b7b8;background:#fff8f1;color:#934c5b;padding:10px 14px;border-radius:99px}
+.hero{min-height:80svh;display:grid;place-items:center;padding:25px 18px}
+.hero-inner{text-align:center;max-width:760px}
+.hero h1{font-size:clamp(3.3rem,12vw,7rem)}
+.hero .subtitle{max-width:580px}
+.section{max-width:1000px;margin:0 auto;padding:68px 20px}
+.section-head{text-align:center;margin-bottom:30px}
+.section-head p{font: .98rem/1.8 system-ui,sans-serif;color:#80665f;max-width:600px;margin:0 auto}
+.letter-card{max-width:760px;margin:auto;padding:clamp(30px,7vw,62px);transform:rotate(.4deg)}
+.letter-card p{font-size:1.12rem;line-height:2;white-space:pre-line}
+.signature{text-align:right;color:var(--red);font-style:italic;font-size:1.3rem}
+.tiny-flower{font-size:1.5rem}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.polaroid{background:#fffdf8;padding:10px 10px 18px;box-shadow:0 13px 30px #63433b20;transform:rotate(var(--tilt));transition:transform .25s;position:relative}
+.polaroid:hover{transform:rotate(0) translateY(-5px)}
+.polaroid img,.placeholder{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:linear-gradient(135deg,#f4d4d7,#e7dfed)}
+.placeholder{display:grid;place-items:center;font-size:3rem;color:#9a6470}
+.polaroid figcaption{text-align:center;padding:12px 3px 0;font-size:.95rem;color:#75544f}
+.photo-pin{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--rose);top:-7px;left:calc(50% - 7px);box-shadow:0 2px 3px #0002}
+.gift-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.gift{background:#fffaf2;border:1px solid #e8c7bd;box-shadow:0 8px 0 #e4c4bb;border-radius:18px;padding:24px 12px;min-height:155px;color:#8d4856;transition:transform .2s}
+.gift:hover{transform:translateY(-4px)}
+.gift .emoji{display:block;font-size:2.8rem;margin-bottom:12px}
+.gift small{font: .86rem/1.5 system-ui,sans-serif}
+.gift-message{font:1rem/1.8 system-ui,sans-serif;text-align:center;max-width:620px;margin:28px auto 0;min-height:56px;color:#785953}
+.final-card{max-width:680px;margin:auto;padding:45px 25px;text-align:center;transform:rotate(-.5deg)}
+.final-card .big{font-size:4rem}
+footer{text-align:center;padding:35px 18px 65px;font: .83rem/1.8 system-ui,sans-serif;color:#9a7772}
+.floating{position:fixed;bottom:-70px;z-index:8;pointer-events:none;animation:floatUp linear forwards;opacity:.85}
+.confetti{position:fixed;top:-16px;z-index:20;pointer-events:none;width:8px;height:13px;animation:fall 3.6s linear forwards}
+@keyframes sway{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(5deg) translateY(-8px)}}
+@keyframes floatUp{to{transform:translateY(-120vh) rotate(22deg);opacity:0}}
+@keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:.1}}
+@media(max-width:650px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.polaroid:nth-child(3){grid-column:span 2;width:72%;justify-self:center}.gift-grid{grid-template-columns:1fr}.section{padding:50px 16px}.topbar{padding:14px}.letter-card p{font-size:1.04rem}.cover-card{padding:50px 22px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<section class="cover" id="gate">
+  <div class="paper lock-card">
+    <span class="tape"></span>
+    <div class="eyebrow">a little scrapbook, sealed with love</div>
+    <div class="stamp" aria-hidden="true">🔐💌</div>
+    <h2>Just for Nandini</h2>
+    <p class="subtitle">This little birthday scrapbook is meant for you. Enter the secret word to open it. 💗</p>
+    <form id="unlockForm">
+      <input id="passwordInput" type="password" autocomplete="off" placeholder="Enter the secret word" aria-label="Secret word" required>
+      <button class="btn" type="submit">Open my scrapbook ✨</button>
+    </form>
+    <p class="error" id="passwordError" aria-live="polite"></p>
+    <p class="small-note">Hint: the secret word is the one Mehul shared with you.</p>
+  </div>
+</section>
+
+<div id="site">
+  <header class="topbar"><span>✂︎ THE NANDINI SCRAPBOOK · EST. 13 OCT 2026</span><button class="music" id="musicBtn">♫ Music: Off</button></header>
+  <main>
+    <section class="hero">
+      <div class="paper cover-card hero-inner">
+        <span class="tape"></span>
+        <div class="eyebrow">today's little reason to celebrate</div>
+        <span class="stamp" aria-hidden="true">🎂</span>
+        <h1>Happy Birthday,<br>Nandini!</h1>
+        <p class="subtitle">A tiny collection of warm wishes, happy memories, and a reminder that you make this world a little brighter. 💗</p>
+        <button class="btn" id="startBtn">Turn the page ↓</button>
+      </div>
+    </section>
+
+    <section class="section" id="letter">
+      <div class="section-head"><div class="eyebrow">page one · a little note</div><h2>Dear Nandini, <span class="tiny-flower">🌷</span></h2></div>
+      <article class="paper letter-card">
+        <span class="tape"></span>
+        <p id="letterText">Happy birthday, Nandini! 💗
+
+I hope this new chapter of your life brings you countless reasons to smile, beautiful surprises, peaceful days, exciting adventures, and all the success you work so hard for.
+
+May you always have people around you who make you feel appreciated, understood, and loved. Keep being your lovely self, keep chasing the things that make you happy, and never forget how much good you deserve.
+
+Here's to new memories, silly laughs, unforgettable moments, and a year that treats you kindly. Have the happiest birthday ever! 🎂✨</p>
+        <div class="signature">With lots of love,<br>Mehul ♡</div>
+      </article>
+    </section>
+
+    <section class="section" id="memories">
+      <div class="section-head"><div class="eyebrow">page two · snapshots & sunshine</div><h2>Little memory lane 📸</h2><p>Every scrapbook needs a few favourite moments. Replace these placeholders with your photos and add captions that only you two understand.</p></div>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <section class="section" id="gifts">
+      <div class="section-head"><div class="eyebrow">page three · sealed surprises</div><h2>Three little gifts 🎁</h2><p>Pick a tiny parcel. Each one has a birthday wish hidden inside.</p></div>
+      <div class="gift-grid">
+        <button class="gift" data-message="💗 A reminder from Mehul: you are appreciated more than you know. Never dim the lovely things that make you you."><span class="emoji">🎀</span><small>Open gift one</small></button>
+        <button class="gift" data-message="🌼 Your birthday mission: do something that makes YOU happy, take a few pictures, eat something delicious, and let yourself be celebrated."><span class="emoji">💌</span><small>Open gift two</small></button>
+        <button class="gift" data-message="🫶 Friendship coupon unlocked: redeem for a long conversation, unlimited laughs, and a friend cheering for you whenever you need it."><span class="emoji">🎁</span><small>Open gift three</small></button>
+      </div>
+      <p class="gift-message" id="giftMessage" aria-live="polite">Choose a gift to reveal your surprise…</p>
+    </section>
+
+    <section class="section">
+      <div class="paper final-card">
+        <span class="tape"></span>
+        <div class="eyebrow">the last page · make a wish</div>
+        <div class="big" aria-hidden="true">🎈✨🎂</div>
+        <h2>One last thing, Nandini…</h2>
+        <p class="subtitle">I hope you never run out of reasons to laugh, dreams to chase, or people who remind you how wonderful you are.</p>
+        <button class="btn" id="wishBtn">Tap for one last wish ✨</button>
+        <p class="gift-message hidden" id="finalWish">Happy Birthday, Nandini! May your year be full of good people, brave beginnings, soft moments, and memories worth keeping forever. — Mehul 💗</p>
+      </div>
+    </section>
+  </main>
+  <footer>Handmade with 💗 by Mehul, especially for Nandini.<br>13 October 2026 · Keep this little page as a happy memory.</footer>
+</div>
+
+<script>
+/* ==================== PERSONALIZE HERE ====================
+   Change the password before publishing. This is a playful
+   front-end gate, NOT secure private hosting: the password and
+   page content can be found by anyone who inspects the source.
+*/
+const CONFIG = {
+  password: "nandini", // Change this to a secret word you both know
+  photos: [
+    { src: "images/memory1.jpg", caption: "A favourite memory 💗" },
+    { src: "images/memory2.jpg", caption: "One for the scrapbook 🌷" },
+    { src: "images/memory3.jpg", caption: "More memories to come ✨" }
+  ]
+};
+/* ========================================================= */
+
+const $ = id => document.getElementById(id);
+$("unlockForm").addEventListener("submit", event => {
+  event.preventDefault();
+  if ($("passwordInput").value.trim().toLowerCase() === CONFIG.password.toLowerCase()) {
+    $("gate").classList.add("hidden");
+    $("site").style.display = "block";
+    burst(100);
+    floatDecor();
+    window.scrollTo({top:0, behavior:"smooth"});
+  } else {
+    $("passwordError").textContent = "Not quite! Try the secret word again 💌";
+    $("passwordInput").select();
+  }
+});
+
+const gallery = $("gallery");
+CONFIG.photos.forEach((photo, i) => {
+  const figure = document.createElement("figure");
+  figure.className = "polaroid";
+  figure.style.setProperty("--tilt", `${[-3,2,-1][i%3]}deg`);
+  const pin = document.createElement("span"); pin.className = "photo-pin"; pin.setAttribute("aria-hidden","true"); figure.appendChild(pin);
+  const img = document.createElement("img");
+  img.src = photo.src;
+  img.alt = photo.caption || `Birthday memory ${i+1}`;
+  img.onerror = () => {
+    const placeholder = document.createElement("div");
+    placeholder.className = "placeholder";
+    placeholder.textContent = ["📷","🌷","🫶"][i%3];
+    img.replaceWith(placeholder);
+  };
+  figure.appendChild(img);
+  const caption = document.createElement("figcaption"); caption.textContent = photo.caption || `Memory #${i+1}`;
+  figure.appendChild(caption); gallery.appendChild(figure);
+});
+
+function burst(count=80) {
+  const colors = ["#bc6577","#d8ad65","#d8c8df","#a7b9a1","#f4c6cb"];
+  for (let i=0;i<count;i++) {
+    const el=document.createElement("i"); el.className="confetti";
+    el.style.left=Math.random()*100+"vw";
+    el.style.background=colors[Math.floor(Math.random()*colors.length)];
+    el.style.animationDelay=Math.random()*1.1+"s";
+    el.style.transform=`rotate(${Math.random()*180}deg)`;
+    document.body.appendChild(el); setTimeout(()=>el.remove(),5000);
+  }
+}
+function floatDecor() {
+  const symbols=["🎈","💗","✨","🌸","🎉"];
+  setInterval(()=>{
+    if ($("site").style.display === "none") return;
+    const el=document.createElement("span"); el.className="floating";
+    el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.fontSize=(18+Math.random()*22)+"px";
+    el.style.animationDuration=(8+Math.random()*7)+"s";
+    document.body.appendChild(el); setTimeout(()=>el.remove(),16000);
+  },1000);
+}
+$("startBtn").addEventListener("click", ()=>$("letter").scrollIntoView({behavior:"smooth"}));
+document.querySelectorAll(".gift").forEach(btn=>btn.addEventListener("click",()=>{
+  $("giftMessage").textContent=btn.dataset.message; burst(24);
+}));
+$("wishBtn").addEventListener("click",()=>{
+  $("finalWish").classList.remove("hidden"); burst(110);
+  $("wishBtn").textContent="Wish sent with love 💗";
+});
+
+/* Small original synthesized melody; audio begins only after a tap. */
+let audioCtx=null, musicTimer=null, musicOn=false, noteIndex=0;
+const notes=[523.25,587.33,659.25,523.25,698.46,659.25,523.25,523.25,587.33,523.25,783.99,698.46];
+function playNote(){
+  if(!musicOn||!audioCtx)return;
+  const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.type="sine"; osc.frequency.value=notes[noteIndex++%notes.length];
+  gain.gain.setValueAtTime(.0001,audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.055,audioCtx.currentTime+.03);
+  gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.30);
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start(); osc.stop(audioCtx.currentTime+.32);
+}
+$("musicBtn").addEventListener("click", async()=>{
+  if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended") await audioCtx.resume();
+  musicOn=!musicOn; $("musicBtn").textContent=musicOn?"♫ Music: On":"♫ Music: Off";
+  if(musicOn){playNote();musicTimer=setInterval(playNote,390)} else clearInterval(musicTimer);
+});
+</script>
+</body>
+</html>
